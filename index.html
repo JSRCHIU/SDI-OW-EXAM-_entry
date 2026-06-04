@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SDI 學科測試 — PUREDIVE</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* ── 全頁底圖 ── */
+  .bg {
+    position: fixed;
+    inset: 0;
+    background-image: url('fish.jpg');   /* ← 把你的圖片改成這個名稱，或換成正確路徑 */
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+  }
+  .dim {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.54);
+    z-index: 1;
+  }
+
+  /* ── 內容 ── */
+  .content {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2.5rem 1.25rem 3rem;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .logo {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: .5px;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: .5rem;
+  }
+
+  h1 {
+    font-size: 32px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: .35rem;
+    letter-spacing: -.3px;
+  }
+
+  .sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 2.25rem;
+  }
+
+  /* ── 卡片 ── */
+  .card {
+    background: rgba(255,255,255,0.11);
+    border: 0.5px solid rgba(255,255,255,0.22);
+    border-radius: 16px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 11px;
+    border-radius: 20px;
+    letter-spacing: .3px;
+  }
+  .badge-a { background: rgba(230,241,251,0.92); color: #0C447C; }
+  .badge-b { background: rgba(234,243,222,0.92); color: #3B6D11; }
+
+  .card-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+  }
+
+  .card-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 14px;
+    line-height: 1.55;
+  }
+
+  /* ── 三個均分按鈕 ── */
+  .btn-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 7px;
+  }
+
+  .btn {
+    padding: 11px 4px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 0.5px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.13);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: background .15s, transform .1s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn:hover  { background: rgba(255,255,255,0.22); }
+  .btn:active { transform: scale(0.97); }
+
+  .btn-primary {
+    background: rgba(255,255,255,0.88);
+    color: #185FA5;
+    border-color: transparent;
+    font-weight: 600;
+  }
+  .btn-primary:hover { background: rgba(255,255,255,1); }
+
+  /* ── footer ── */
+  .footer {
+    font-size: 12px;
+    color: rgba(255,255,255,0.28);
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+
+  /* ── toast ── */
+  .toast {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%) translateY(16px);
+    background: rgba(20,20,20,0.92);
+    color: #fff;
+    font-size: 13px;
+    padding: 10px 22px;
+    border-radius: 24px;
+    opacity: 0;
+    transition: opacity .2s, transform .2s;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 999;
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  @media (max-width: 380px) {
+    .btn { font-size: 12px; padding: 10px 2px; gap: 3px; }
+    h1 { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg"></div>
+<div class="dim"></div>
+
+<div class="content">
+  <p class="logo">SDI OPEN WATER</p>
+  <h1>學科測試</h1>
+  <p class="sub">選擇試卷版本開始作答</p>
+
+  <div class="card">
+    <div class="card-header">
+      <span class="badge badge-a">A 卷</span>
+      <span class="card-title">Version A</span>
+    </div>
+    <p class="card-desc">共 50 題，及格分數 90 分，完成後可下載成績單</p>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="go('https://sdi-ow-exam.vercel.app/')">
+        &#x1F517; 開始作答
+      </button>
+      <button class="btn" id="copy-a" onclick="copyLink('https://sdi-ow-exam.vercel.app/','copy-a')">
+        &#x2398; 複製連結
+      </button>
+      <button class="btn" onclick="shareLink('https://sdi-ow-exam.vercel.app/','SDI OW 學科測試 A 卷','copy-a')">
+        &#x2197; 分享
+      </button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <span class="badge badge-b">B 卷</span>
+      <span class="card-title">Version B</span>
+    </div>
+    <p class="card-desc">共 50 題，及格分數 90 分，完成後可下載成績單</p>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="go('https://sdi-ow-exam-b.vercel.app/')">
+        &#x1F517; 開始作答
+      </button>
+      <button class="btn" id="copy-b" onclick="copyLink('https://sdi-ow-exam-b.vercel.app/','copy-b')">
+        &#x2398; 複製連結
+      </button>
+      <button class="btn" onclick="shareLink('https://sdi-ow-exam-b.vercel.app/','SDI OW 學科測試 B 卷','copy-b')">
+        &#x2197; 分享
+      </button>
+    </div>
+  </div>
+
+  <p class="footer">PUREDIVE · Keelung &amp; Kenting</p>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  function go(url) {
+    window.open(url, '_blank');
+  }
+
+  function copyLink(url, btnId) {
+    const btn = document.getElementById(btnId);
+    const orig = btn.innerHTML;
+    navigator.clipboard.writeText(url).then(() => {
+      btn.innerHTML = '&#x2713; 已複製';
+      showToast('連結已複製');
+      setTimeout(() => { btn.innerHTML = orig; }, 2000);
+    }).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = url;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      btn.innerHTML = '&#x2713; 已複製';
+      showToast('連結已複製');
+      setTimeout(() => { btn.innerHTML = orig; }, 2000);
+    });
+  }
+
+  function shareLink(url, title, fallbackBtnId) {
+    if (navigator.share) {
+      navigator.share({ title: title, url: url }).catch(() => {});
+    } else {
+      copyLink(url, fallbackBtnId);
+      showToast('已複製連結（此裝置不支援分享）');
+    }
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2200);
+  }
+</script>
+
+</body>
+</html>
