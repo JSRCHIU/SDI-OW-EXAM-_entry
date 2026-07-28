@@ -184,9 +184,7 @@
 <div class="dim"></div>
 
 <div class="content">
-  <p class="logo">SDI OPEN WATER</p>
-  <h1>學科測試</h1>
-  <p class="sub">選擇試卷版本開始作答</p>
+  <p class="logo" style="font-size:30px;">SDI OPEN WATER</p>
 
   <div class="card">
     <div class="card-header">
@@ -226,6 +224,39 @@
     </div>
   </div>
 
+  <p class="logo" style="font-size:30px;margin-top:2rem;">SDI NITROX DIVER</p>
+
+  <div class="card">
+    <div class="card-header">
+      <span class="badge badge-a">A 卷</span>
+      <span class="card-title">Version A</span>
+    </div>
+    <p class="card-desc">共 40 題，及格分數 85 分，完成後可下載成績單</p>
+    <div class="btn-row">
+      <button class="btn btn-primary" disabled style="opacity:0.45;cursor:not-allowed;">
+        &#x1F517; 尚未上線
+      </button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <span class="badge badge-b">B 卷</span>
+      <span class="card-title">Version B</span>
+    </div>
+    <p class="card-desc">共 40 題，及格分數 85 分，完成後可下載成績單</p>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="go('https://puredive-nitrox-exam-b.vercel.app/')">
+        &#x1F517; 開始作答
+      </button>
+      <button class="btn" id="copy-nitrox-b" onclick="copyLink('https://puredive-nitrox-exam-b.vercel.app/','copy-nitrox-b')">
+        &#x2398; 複製連結
+      </button>
+      <button class="btn" onclick="shareLink('https://puredive-nitrox-exam-b.vercel.app/','SDI NITROX 學科測試 B 卷','copy-nitrox-b')" class="btn btn-share">
+        &#x2197; 分享
+      </button>
+    </div>
+  </div>
 
 </div>
 
